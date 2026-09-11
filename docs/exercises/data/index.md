@@ -22,7 +22,7 @@ fim do script, o que garante que os números abaixo sejam reproduzíveis.
 
 ### Código
 
-O script vive em [`code/exercise1_point_clouds.py`](https://github.com/usuario/ann-dl/blob/main/docs/exercises/data/code/exercise1_point_clouds.py)
+O script vive em [`code/exercise1_point_clouds.py`](https://github.com/lucacm/ann-dl-2026-2/blob/main/docs/exercises/data/code/exercise1_point_clouds.py)
 e é incluído aqui pelo próprio arquivo.
 
 ``` { .python .copy .select linenums='1' title="docs/exercises/data/code/exercise1_point_clouds.py" }
@@ -129,7 +129,7 @@ do início ao fim do script.
 
 ### Código
 
-O script vive em [`code/exercise2_high_dim.py`](https://github.com/usuario/ann-dl/blob/main/docs/exercises/data/code/exercise2_high_dim.py)
+O script vive em [`code/exercise2_high_dim.py`](https://github.com/lucacm/ann-dl-2026-2/blob/main/docs/exercises/data/code/exercise2_high_dim.py)
 e é incluído aqui pelo próprio arquivo.
 
 ``` { .python .copy .select linenums='1' title="docs/exercises/data/code/exercise2_high_dim.py" }
@@ -224,7 +224,7 @@ o pré-processamento.
 
 ### Código
 
-O script vive em [`code/exercise3_spaceship_titanic.py`](https://github.com/usuario/ann-dl/blob/main/docs/exercises/data/code/exercise3_spaceship_titanic.py)
+O script vive em [`code/exercise3_spaceship_titanic.py`](https://github.com/lucacm/ann-dl-2026-2/blob/main/docs/exercises/data/code/exercise3_spaceship_titanic.py)
 e é incluído aqui pelo próprio arquivo. Ele espera o dataset em
 `docs/exercises/data/code/data/train.csv` (não versionado, veja `.gitignore`).
 
