@@ -6,13 +6,14 @@ window.MathJax = {
     processEnvironments: true
   },
   options: {
-    skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"]
+    // Padrão oficial do Material para pymdownx.arithmatex (generic: true): só
+    // tipografa dentro de <span class="arithmatex">, ignora o resto da página.
+    ignoreHtmlClass: ".*|",
+    processHtmlClass: "arithmatex"
   }
 };
 
 // Re-typeset after each page load (Material SPA)
 document$.subscribe(() => {
-  if (window.MathJax?.typesetPromise) {
-    window.MathJax.typesetPromise();
-  }
+  MathJax.typesetPromise();
 });
