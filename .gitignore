@@ -1,5 +1,13 @@
 site/
 env/
+.venv/
 .cache/
 .vscode/
 target/
+.ipynb_checkpoints/
+.jupyter/
+.jupyter_ystore.db
+.DS_Store
+
+# Dataset baixado manualmente do Kaggle (Exercise 3), não versionar dados brutos
+docs/exercises/data/code/data/

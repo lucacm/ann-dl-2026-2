@@ -5,11 +5,11 @@
 #  ANTES DE PUBLICAR: troque todas as linhas marcadas com "# TROCAR" abaixo.
 #  Passo a passo em docs/template/index.md > Publicação no GitHub Pages.
 # =============================================================================
-site_name: ANN-DL · Entregas                  # TROCAR: título exibido no topo do site
-site_author: Seu Nome, Sobrenome              # TROCAR: seu nome (ou os nomes do grupo)
-site_url: https://repo-classes.github.io/ann-dl    # TROCAR: https://<seu-usuario>.github.io/<seu-repo>
-repo_url: https://github.com/repo-classes/ann-dl/   # TROCAR: https://github.com/<seu-usuario>/<seu-repo>
-repo_name: repo-classes/ann-dl                     # TROCAR: <seu-usuario>/<seu-repo>
+site_name: ANN-DL · Entregas
+site_author: Luca Cazzolato Machado
+site_url: https://lucacm.github.io/ann-dl-2026-2/
+repo_url: https://github.com/lucacm/ann-dl-2026-2/
+repo_name: lucacm/ann-dl-2026-2
 
 theme:
   name: material
@@ -18,7 +18,7 @@ theme:
     # Modo claro
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: grey
+      primary: light blue
       toggle:
         icon: material/toggle-switch-off-outline
         name: Mudar para o modo escuro
@@ -26,7 +26,7 @@ theme:
     # Modo escuro
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: grey
+      primary: light blue
       toggle:
         icon: material/toggle-switch
         name: Mudar para a preferência do sistema
@@ -41,7 +41,10 @@ theme:
     - navigation.path
     - navigation.tracking
     - navigation.expand
-    - navigation.indexes
+    # navigation.indexes removido de propósito: ele faz o cabeçalho de uma seção do
+    # menu (ex. "Exercícios") virar link para a página do primeiro item em vez de só
+    # expandir/recolher. Sem ele, o cabeçalho de uma seção nunca navega sozinho, só
+    # abre o dropdown para os itens de dentro.
   icon:
     admonition:
       note: fontawesome/solid/note-sticky
@@ -123,9 +126,19 @@ validation:
 
 # Os scripts de code/ ficam no repositório e são incluídos nos relatórios via --8<--,
 # mas não são páginas da navegação.
+#
+# As entradas abaixo também tiram do menu o que ainda não foi entregue nesta edição
+# (Perceptron, MLP, VAE, Projeto) e as páginas de orientação do template (guia de uso,
+# exemplos de nav). Os arquivos continuam no repositório para quando cada entrega for
+# feita — nesse momento, volte a entrada correspondente para a `nav` abaixo.
 not_in_nav: |
   /exercises/*/code/*
-  /projects/*/code/*
+  /exercises/perceptron/**
+  /exercises/mlp/**
+  /exercises/vae/**
+  /projects/**
+  /template/**
+  /examples/**
 
 extra_javascript:
   # A configuração precisa vir ANTES da biblioteca do MathJax
@@ -142,29 +155,26 @@ extra_javascript:
 # =============================================================================
 nav:
   - Home: index.md
-  - Como usar este template: template/index.md
 
   # A lista de entregas muda de edição para edição: acrescente ou remova itens
   # aqui e as pastas correspondentes em docs/.
-  - Data: exercises/data/index.md
-  - Perceptron: exercises/perceptron/index.md
-  - MLP: exercises/mlp/index.md
-  - VAE: exercises/vae/index.md
+  #
+  # Perceptron, MLP, VAE e Projeto ainda não foram entregues nesta edição: as pastas e
+  # os templates em branco continuam em docs/, só não aparecem no menu por enquanto
+  # (ver not_in_nav acima). Quando cada um for entregue, acrescente a linha correspondente
+  # dentro da seção certa abaixo:
+  #   - Exercícios:
+  #     - Data: exercises/data/index.md
+  #     - Perceptron: exercises/perceptron/index.md
+  #     - MLP: exercises/mlp/index.md
+  #     - VAE: exercises/vae/index.md
+  #   - Projetos:
+  #     - 1. EDA: projects/eda/index.md
+  #     - 2. Classificação: projects/classification/index.md   # escolha UMA das duas
+  #     - 2. Regressão: projects/regression/index.md            # e apague a outra
+  #     - 3. Generativo: projects/generative/index.md
+  - Exercícios:
+    - Data: exercises/data/index.md
 
-  # O projeto é UM só, com três entregas ao longo do semestre.
-  - Projeto:
-    - projects/index.md
-    - 1. EDA: projects/eda/index.md
-    # Escolha UMA das duas linhas abaixo, e apague a outra (e a pasta que sobrar):
-    - 2. Classificação: projects/classification/index.md
-    - 2. Regressão: projects/regression/index.md
-    - 3. Generativo: projects/generative/index.md
-
-  # Remova esta seção inteira quando não precisar mais dos exemplos.
-  - Exemplos de uso:
-    - Como montar o menu: examples/index.md
-    - Notebook no menu: examples/notebook/data-exercise-1.ipynb
-    # TROCAR "usuario/ann-dl" pelo seu repositório, senão o link abre o notebook de outra pessoa:
-    - Abrir no Colab ↗: https://colab.research.google.com/github/usuario/ann-dl/blob/main/docs/examples/notebook/data-exercise-1.ipynb
-
-  - Enunciados da disciplina ↗: https://insper.github.io/ann-dl/
+  # O link para o enunciado já aparece na Home (bloco "Edição") e em cada página de
+  # entrega (admonition "Enunciado"), por isso não duplica aqui no menu.
