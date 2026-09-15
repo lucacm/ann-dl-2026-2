@@ -41,6 +41,7 @@ theme:
     - navigation.path
     - navigation.tracking
     - navigation.expand
+    - navigation.indexes
     # navigation.indexes removido de propósito: ele faz o cabeçalho de uma seção do
     # menu (ex. "Exercícios") virar link para a página do primeiro item em vez de só
     # expandir/recolher. Sem ele, o cabeçalho de uma seção nunca navega sozinho, só
@@ -163,18 +164,18 @@ nav:
   # os templates em branco continuam em docs/, só não aparecem no menu por enquanto
   # (ver not_in_nav acima). Quando cada um for entregue, acrescente a linha correspondente
   # dentro da seção certa abaixo:
-  #   - Exercícios:
-  #     - Data: exercises/data/index.md
+
+  - Data: exercises/data/index.md
   #     - Perceptron: exercises/perceptron/index.md
   #     - MLP: exercises/mlp/index.md
   #     - VAE: exercises/vae/index.md
-  #   - Projetos:
-  #     - 1. EDA: projects/eda/index.md
+  - Projeto: 
+    - projects/index.md
+    - 1. EDA: projects/eda/index.md
   #     - 2. Classificação: projects/classification/index.md   # escolha UMA das duas
   #     - 2. Regressão: projects/regression/index.md            # e apague a outra
   #     - 3. Generativo: projects/generative/index.md
-  - Exercícios:
-    - Data: exercises/data/index.md
+
 
   # O link para o enunciado já aparece na Home (bloco "Edição") e em cada página de
   # entrega (admonition "Enunciado"), por isso não duplica aqui no menu.
