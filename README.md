@@ -54,9 +54,3 @@ mkdocs build --strict
 O workflow em [.github/workflows/main.yaml](.github/workflows/main.yaml) roda
 `mkdocs gh-deploy --force` a cada push na `main`: ele constrói o HTML e o publica na branch
 `gh-pages`, que o GitHub Pages serve.
-
-## Prazo
-
-O prazo de uma entrega é o **timestamp do último commit que toca a pasta daquela entrega**,
-não a hora do formulário nem a da publicação. Por isso os commits acontecem ao longo do
-trabalho, não todos de uma vez no fim.
