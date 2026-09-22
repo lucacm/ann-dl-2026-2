@@ -19,7 +19,7 @@ Este site é um **portfólio** das entregas da disciplina.
 ### Exercícios — individuais
 
 - [x] [Data](exercises/data/index.md)
-- [ ] Perceptron
+- [x] [Perceptron](exercises/perceptron/index.md)
 - [ ] MLP
 - [ ] VAE
 

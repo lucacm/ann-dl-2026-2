@@ -129,12 +129,11 @@ validation:
 # mas não são páginas da navegação.
 #
 # As entradas abaixo também tiram do menu o que ainda não foi entregue nesta edição
-# (Perceptron, MLP, VAE, Projeto) e as páginas de orientação do template (guia de uso,
+# (MLP, VAE, Projeto) e as páginas de orientação do template (guia de uso,
 # exemplos de nav). Os arquivos continuam no repositório para quando cada entrega for
-# feita — nesse momento, volte a entrada correspondente para a `nav` abaixo.
+# feita, e nesse momento, volte a entrada correspondente para a `nav` abaixo.
 not_in_nav: |
   /exercises/*/code/*
-  /exercises/perceptron/**
   /exercises/mlp/**
   /exercises/vae/**
   /projects/**
@@ -144,7 +143,9 @@ not_in_nav: |
 extra_javascript:
   # A configuração precisa vir ANTES da biblioteca do MathJax
   - javascripts/mathjax.js
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  # jsdelivr em vez de unpkg: mais estável em algumas redes onde unpkg fica bloqueado
+  # ou lento, e a fórmula simplesmente não aparece (sem erro visível na página).
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 # =============================================================================
 #  NAVEGAÇÃO — uma entrega, um item de menu.
@@ -166,7 +167,7 @@ nav:
   # dentro da seção certa abaixo:
 
   - Data: exercises/data/index.md
-  #     - Perceptron: exercises/perceptron/index.md
+  - Perceptron: exercises/perceptron/index.md
   #     - MLP: exercises/mlp/index.md
   #     - VAE: exercises/vae/index.md
   - Projeto: 

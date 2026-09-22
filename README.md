@@ -13,7 +13,7 @@ docs/
   index.md                              # capa: identificação e status das entregas
   exercises/
     data/{index.md,code/,figures/}      # entregue
-    perceptron/{index.md,code/,figures/}
+    perceptron/{index.md,code/,figures/}  # entregue
     mlp/{index.md,code/,figures/}
     vae/{index.md,code/,figures/}
   projects/                             # projeto em equipe, três entregas
@@ -25,7 +25,7 @@ Cada entrega tem a própria pasta, sempre no mesmo formato: `index.md` para o re
 `code/` para os scripts (incluídos no relatório via `--8<--`, nunca copiados e colados) e
 `figures/` para as imagens commitadas.
 
-Perceptron, MLP, VAE e o projeto ainda não foram entregues nesta edição; as pastas já existem
+MLP, VAE e o projeto ainda não foram entregues nesta edição; as pastas já existem
 no repositório, prontas para quando cada um for feito.
 
 ## Setup
