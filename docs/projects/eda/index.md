@@ -268,10 +268,35 @@ com 60.000 km e 190.000 ₹). Deduplicar nesse ponto apagaria carros distintos.
 | `Drivetrain`, `Length`, `Width`, `Height`, `Fuel Tank Capacity`, `Location`, `Color` | só existem no v4 (79,8%) |
 | `source` | artefato da coleta, indisponível para um carro novo |
 
-Nenhuma constante. **Vazamento:** nenhuma das 11 features é calculada a partir do preço. O
-único vazamento direto do alvo no material era o `Present_Price` do `car data`, que ficou
-fora. O vazamento indireto, o mesmo carro nos dois lados do split, foi contido pela
-deduplicação acima.
+Nenhuma coluna é constante.
+
+#### Riscos de vazamento
+
+Nenhuma das 11 features é calculada a partir do preço. Os riscos que existem são de dois
+tipos: informação do alvo entrando como feature, e informação do teste entrando no
+pré-processamento ou no próprio treino.
+
+``` mermaid
+flowchart LR
+    raw[Dados brutos v3 + v4] --> dedup[Deduplicação<br/>e harmonização]
+    dedup --> split{{split treino/teste}}
+    split -->|treino| fit["fit_transform<br/>(estatísticas saem só daqui)"]
+    split -->|teste| apply[transform]
+    fit --> model[Modelo]
+    apply --> model
+```
+
+| Risco | Onde aparece | Contenção |
+|-------|--------------|-----------|
+| Estatísticas calculadas antes do split | medianas de imputação, quantis de corte, média e desvio da padronização, categorias frequentes, PCA | ajustadas só no treino pelo `ColumnTransformer` (4C mostra a prova: média zero no treino e não no teste) |
+| Mesmo carro no treino e no teste | 213 grupos do v3 e 4 do v4 reanunciados com outro preço (Duplicatas, acima) | cada grupo colapsado numa linha **antes** do split |
+| Feature que é o alvo com outro nome | `Present_Price` (preço do carro novo) do `car data` | arquivo descartado na seleção das fontes (1A) |
+| Alvo usado para estratificar | quintis de log(preço) no `split()` | usados só no sorteio, nunca como feature |
+| Coluna que só existe por causa da coleta | `source` (arquivo de origem) | fora das features |
+
+/// caption
+**Tabela 7.** Riscos de vazamento e como cada um foi contido.
+///
 
 ### 1C. Alvo
 
@@ -284,7 +309,7 @@ deduplicação acima.
 | 796.193 ₹ | 475.000 ₹ | 1.353.854 ₹ | 29.999 ₹ | 35.000.000 ₹ | 8,39 | 0,43 | 121,3 |
 
 /// caption
-**Tabela 7.** Estatísticas do preço (dataset final).
+**Tabela 8.** Estatísticas do preço (dataset final).
 ///
 
 ![Histogramas do preço bruto e do log do preço, com v3 e v4 sobrepostos](figures/fig04-target.png)
@@ -330,7 +355,7 @@ Os quintis servem apenas para o sorteio e não entram no modelo. Não há split 
 | log(preço) médio | 13,0851 | 13,0877 |
 
 /// caption
-**Tabela 8.** Resultado do split.
+**Tabela 9.** Resultado do split.
 ///
 
 Uma marca, **Peugeot** (1 anúncio), caiu só no teste: é o caso de categoria nunca vista que o
@@ -360,7 +385,7 @@ esses números.
 | `is_individual` | 0,91 | 1 | 0,28 | 0 | 1 | 1 | 1 | −2,92 | n/a |
 
 /// caption
-**Tabela 9.** Estatísticas descritivas das numéricas (sem os ausentes da Tabela 4).
+**Tabela 10.** Estatísticas descritivas das numéricas (sem os ausentes da Tabela 4).
 ///
 
 ![Seis histogramas: ano, km, cilindrada, potência, torque e assentos, com mediana e média marcadas](figures/fig05-numeric-hist.png)
@@ -405,7 +430,7 @@ anúncios abaixo de 1000 km. Por isso o pipeline corta nos quantis **antes** do 
 | `brand` | **39** | Maruti 2502 (28,6%), Hyundai 1579 (18,0%), Mahindra 821 (9,4%), Tata 691 (7,9%), … |
 
 /// caption
-**Tabela 10.** Frequências das categóricas (`owner` e `is_individual` incluídas pela forma
+**Tabela 11.** Frequências das categóricas (`owner` e `is_individual` incluídas pela forma
 de categorias, embora entrem no modelo como números).
 ///
 
@@ -438,7 +463,7 @@ em cinza.
 --8<-- "docs/projects/eda/code/eda.py:corr"
 ```
 
-**Método: Spearman.** As numéricas têm assimetrias de até 13,4 (Tabela 9) e o alvo de 8,4.
+**Método: Spearman.** As numéricas têm assimetrias de até 13,4 (Tabela 10) e o alvo de 8,4.
 Pearson mede relação *linear* e é sensível à cauda; Spearman mede relação *monótona* sobre os
 postos e não liga para a escala. A diferença aparece nos números: a correlação entre ano e
 preço é **0,347 por Pearson e 0,704 por Spearman**. O preço sobe com o ano de forma
@@ -460,7 +485,7 @@ exponencial, não linear, e Pearson subestima a relação pela metade.
 | `year` × `owner` | −0,501 |
 
 /// caption
-**Tabela 11.** Os cinco pares mais correlacionados (sem o alvo).
+**Tabela 12.** Os cinco pares mais correlacionados (sem o alvo).
 ///
 
 ![Três dispersões em escala log: cilindrada por torque, potência por torque e cilindrada por potência, coloridas por origem](figures/fig09-redundant-pairs.png)
@@ -488,7 +513,7 @@ passou por mais mãos. É a segunda dimensão do dataset, "idade/uso", e reapare
 | faixa entre os anos | −0,078 a +0,278 |
 
 /// caption
-**Tabela 12.** O sinal da relação entre km e preço inverte quando se controla pelo ano.
+**Tabela 13.** O sinal da relação entre km e preço inverte quando se controla pelo ano.
 ///
 
 No agregado, mais km significa carro mais barato. **Mas entre carros do mesmo ano, mais km
@@ -517,7 +542,7 @@ nos automáticos. A entre dono e preço é −0,396 no v3 e só −0,109 no v4.
 | `is_individual` | outros 650.000 · particular 450.000 |
 
 /// caption
-**Tabela 13.** Preço mediano por categoria.
+**Tabela 14.** Preço mediano por categoria.
 ///
 
 **Conclusões da Figura 10:**
@@ -563,7 +588,7 @@ cardinalidade não pode ser resolvida descartando a marca.
 | pareada por marca × faixa de ano × câmbio | 0,045 | **1,11×** |
 
 /// caption
-**Tabela 14.** Efeito da origem antes e depois de comparar carros parecidos (85 células com
+**Tabela 15.** Efeito da origem antes e depois de comparar carros parecidos (85 células com
 pelo menos 3 anúncios de cada origem, cobrindo 7631 anúncios).
 ///
 
@@ -590,7 +615,7 @@ diferença entre as fontes**. Empilhar os arquivos não cria dois mercados incom
 | `year` por dono | 0: 2021 · 1: 2016 · 2: 2012 · 3: 2010 · 4: 2009 | 3,0 · 4,0 · 5,0 · 4,2 · 5,0 |
 
 /// caption
-**Tabela 15.** Posição e dispersão por grupo.
+**Tabela 16.** Posição e dispersão por grupo.
 ///
 
 **Leitura por posição e dispersão:**
@@ -620,13 +645,13 @@ Cada escolha aponta para o achado que a motiva:
 | # | Problema | Achado | Estratégia (ajustada só no treino) |
 |---|---|---|---|
 | 1 | **Ausentes** | 3,3% das linhas, quase todas sem as 4 colunas técnicas ao mesmo tempo; não aleatório (preço mediano 210 mil contra 475 mil, 1B) | numéricas: **mediana do treino** + **coluna indicadora de ausência** (`MissingIndicator`), para o modelo ainda saber que a ficha faltava. Categóricas: moda (hoje sem ausentes; é defensivo) |
-| 2 | **Outliers** | `km` com 2,36 milhões e 0 km; caudas de potência, torque e cilindrada (assimetria até 13,4, Tabela 9) | **corte nos quantis 0,5% e 99,5% do treino** (`QuantileClipper`) nas 4 assimétricas, seguido de `log1p` (Figura 6). Afeta **204 linhas do treino (2,91%)** |
+| 2 | **Outliers** | `km` com 2,36 milhões e 0 km; caudas de potência, torque e cilindrada (assimetria até 13,4, Tabela 10) | **corte nos quantis 0,5% e 99,5% do treino** (`QuantileClipper`) nas 4 assimétricas, seguido de `log1p` (Figura 6). Afeta **204 linhas do treino (2,91%)** |
 | 3 | **Encoding** | `brand` com 39 marcas, 16 abaixo de 20 anúncios; Peugeot só no teste (1D); `owner` monótona com o preço (Figura 10) | **one-hot** com `min_frequency=20` e `handle_unknown="infrequent_if_exist"`: marcas raras e categorias **nunca vistas** caem numa coluna "infrequente". `owner` como **ordinal** numérica, `is_individual` como 0/1 |
-| 4 | **Escala** | escalas de 0/1 (`is_individual`) a 10⁶ (`km`) (Tabela 9) | **`StandardScaler`** em todas as numéricas, depois do log nas 4 assimétricas. A rede neural precisa de entradas centradas e com variância comparável, senão a feature de maior escala domina o gradiente e satura as ativações |
+| 4 | **Escala** | escalas de 0/1 (`is_individual`) a 10⁶ (`km`) (Tabela 10) | **`StandardScaler`** em todas as numéricas, depois do log nas 4 assimétricas. A rede neural precisa de entradas centradas e com variância comparável, senão a feature de maior escala domina o gradiente e satura as ativações |
 | 5 | **Alvo** | assimetria 8,39 → 0,43 em log (1C) | modelar **log(preço)**. Fora do `ColumnTransformer`: entra no modelo da próxima entrega |
 
 /// caption
-**Tabela 16.** Estratégias de pré-processamento.
+**Tabela 17.** Estratégias de pré-processamento.
 ///
 
 Por que **cortar** e não **remover** outliers: as caudas misturam valores impossíveis (2,36
@@ -664,7 +689,7 @@ coloridas por log10(preço). O alvo não entra na projeção, serve só para col
 | Acumulada | 0,3335 | **0,5455** | 0,6462 | 0,7395 | **0,8064** | 0,8533 | 0,8851 | **0,9084** |
 
 /// caption
-**Tabela 17.** Variância explicada pelas oito primeiras componentes.
+**Tabela 18.** Variância explicada pelas oito primeiras componentes.
 ///
 
 **PC1 + PC2 retêm 54,55%** da variância. São precisas 5 componentes para 80% e 8 para 90%.
@@ -726,7 +751,7 @@ Para comparar os mapas com o mesmo critério, usamos duas medidas:
 | *controle: colunas embaralhadas, t-SNE 50* | n/a | n/a | ***0,916*** |
 
 /// caption
-**Tabela 18.** Os cinco mapas com os mesmos critérios, mais a referência e o controle.
+**Tabela 19.** Os cinco mapas com os mesmos critérios, mais a referência e o controle.
 ///
 
 **O controle.** Antes de interpretar os grupos dos mapas não lineares, rodamos o t-SNE sobre
@@ -786,7 +811,7 @@ O pipeline é importável de `code/`, e é assim que o script e as entregas segu
 | Linhas com indicador de ausência = 1 | 214 | 69 |
 
 /// caption
-**Tabela 19.** Saída do pipeline.
+**Tabela 20.** Saída do pipeline.
 ///
 
 **Features finais (37):** são produzidas na ordem abaixo.
@@ -822,7 +847,7 @@ O pipeline é importável de `code/`, e é assim que o script e as entregas segu
 3. **Motor, potência e torque são redundantes** (ρ de 0,77 a 0,86; Figuras 8 e 9) e formam a
    PC1. Ano, km e donos formam a PC2 (Figura 14). As duas componentes se correlacionam com o
    preço.
-4. **km tem um paradoxo de Simpson** (Tabela 12): ρ = −0,33 no geral e +0,16 dentro do mesmo
+4. **km tem um paradoxo de Simpson** (Tabela 13): ρ = −0,33 no geral e +0,16 dentro do mesmo
    ano, mediado pelo diesel (Figura 13).
 5. **Marca e câmbio são as categóricas mais fortes** (20,6× e 3,7× entre medianas; Figuras 10
    e 11).
@@ -836,8 +861,8 @@ O pipeline é importável de `code/`, e é assim que o script e as entregas segu
 | Mesmo carro no treino e no teste | 213 grupos reanunciados (1B) | colapsados antes do split; manter `load_dataset()` como única porta de entrada |
 | Extrapolação para carros caros e recentes | > 20 lakh e `year` > 2020 quase só no v4 (Figura 1, Tabela 6) | avaliar o erro **por faixa de preço e por origem**, além do global |
 | Marcas raras com coeficiente instável | 16 marcas < 20 anúncios (Figura 7) | grupo *infrequent*; testar um embedding de marca se o erro por marca ficar alto |
-| Colinearidade no bloco técnico | ρ até 0,86 (Tabela 11) | regularização (L2/dropout) na rede; não interpretar pesos individuais |
-| Efeito de km mal especificado | Simpson (Tabela 12) | sempre `year` e `km` juntos; checar resíduos por ano |
+| Colinearidade no bloco técnico | ρ até 0,86 (Tabela 12) | regularização (L2/dropout) na rede; não interpretar pesos individuais |
+| Efeito de km mal especificado | Simpson (Tabela 13) | sempre `year` e `km` juntos; checar resíduos por ano |
 | Erro em rúpias dominado pelos caros | assimetria 8,39 | treinar em log; reportar também o erro relativo |
 | Grupo `owner` = 0 atípico | 25 linhas, 21 de luxo do v4 (Figura 10) | monitorar o resíduo desse grupo |
 
@@ -855,6 +880,33 @@ O pipeline é importável de `code/`, e é assim que o script e as entregas segu
 | 8 | Linhas afetadas pela estratégia de outliers | 204 linhas do treino (2,91%) cortadas nos quantis 0,5%/99,5% |
 | 9 | Variância explicada por PC1 + PC2 | 54,55% |
 | 10 | Shape após o pipeline | treino (7003, 37), teste (1751, 37) |
+
+## Conclusão
+
+**O dataset permite a regressão pretendida.** O sinal está nas features e não depende de
+vazamento:
+- ano e potência têm ρ de 0,70 e 0,72 com o preço;
+- a marca separa o preço em 20,6× entre medianas;
+- o câmbio, em 3,7×.
+
+O que ele **impede** ou limita:
+
+- **Extrapolar para o topo e para os anos recentes.** Carros acima de 20 lakh e de 2021–2022
+  existem quase só no v4, em poucas centenas de linhas. O erro nessa faixa deve ser medido à
+  parte, não só o global.
+- **Separar versões do mesmo modelo.** Sem `name`/`Model` (identificadores com milhares de
+  valores), um "Alto LXI" e um "Alto LXI Airbag" são o mesmo carro para o modelo. Parte da
+  variação de preço não tem como ser explicada.
+- **Usar o tempo.** Os arquivos não trazem a data do anúncio. Não há como fazer um split
+  temporal nem corrigir a inflação entre as duas coletas. O resíduo de 1,11× entre v4 e v3
+  (3B) pode ser exatamente isso.
+- **Saber o estado do carro.** Não há coluna sobre conservação, sinistros ou cidade (esta só
+  existia no v4). Dois carros iguais nas 11 features podem ter preços legitimamente
+  diferentes.
+
+Nenhum desses achados inviabiliza a tarefa. A equipe segue com **regressão de log(preço)
+sobre v3 + v4**, usando o pipeline de 4C. Para ser útil, a próxima entrega precisa superar o
+baseline de RMSE 0,914 em log(preço) (1D).
 
 ## Referências
 
