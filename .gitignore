@@ -12,3 +12,8 @@ __pycache__/
 
 # Dataset baixado manualmente do Kaggle (Exercise 3), não versionar dados brutos
 docs/exercises/data/code/data/
+# Material de apoio local (enunciados, notebook de referência do professor)
+.context/
+
+# Dataset CarDekho baixado manualmente do Kaggle (Projeto, EDA), não versionar dados brutos
+docs/projects/eda/code/data/

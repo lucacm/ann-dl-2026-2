@@ -27,6 +27,6 @@ Este site é um **portfólio** das entregas da disciplina.
 
 Um projeto, um dataset, três entregas:
 
-- [ ] EDA
+- [x] [EDA](projects/eda/index.md)
 - [ ] Classificação **ou** Regressão
 - [ ] Generativo

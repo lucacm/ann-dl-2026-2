@@ -140,6 +140,12 @@ not_in_nav: |
   /template/**
   /examples/**
 
+# Dados brutos baixados do Kaggle (não versionados) e o cache do Python gerado ao rodar os
+# scripts: fora do site, mesmo num build local.
+exclude_docs: |
+  /projects/eda/code/data/
+  __pycache__/
+
 extra_javascript:
   # A configuração precisa vir ANTES da biblioteca do MathJax
   - javascripts/mathjax.js
