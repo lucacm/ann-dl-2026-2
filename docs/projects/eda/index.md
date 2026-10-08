@@ -4,6 +4,8 @@ task: regression
 dataset: https://www.kaggle.com/datasets/nehalbirla/vehicle-dataset-from-cardekho
 team:
   - Luca Cazzolato Machado
+  - Gabriel Cavarsan
+  - Gabriel Gerner Maggion
 ai_use: "Claude (via Claude Code) foi usado para planejar a entrega, comparar os 4 arquivos do
   dataset, escrever os scripts em code/, gerar as figuras e redigir a primeira versão das
   análises e deste relatório. Todo o código foi executado, os números conferidos contra a
@@ -21,8 +23,8 @@ ai_use: "Claude (via Claude Code) foi usado para planejar a entrega, comparar os
     | Nome completo | GitHub |
     |---------------|--------|
     | Luca Cazzolato Machado | [@lucacm](https://github.com/lucacm) |
-    | | |
-    | | |
+    | Gabriel Cavarsan | [@Gabriel-Cavarsan](https://github.com/Gabriel-Cavarsan) |
+    | Gabriel Gerner Maggion | [@gabrielgmaggion-dot](https://github.com/gabrielgmaggion-dot) |
 
     Dataset, decisões e status: [página do projeto](../index.md).
 

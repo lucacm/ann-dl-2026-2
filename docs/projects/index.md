@@ -18,8 +18,8 @@ ao longo do semestre, cada uma com data e peso próprios.
 | Nome completo | E-mail | GitHub |
 |---------------|--------|--------|
 | Luca Cazzolato Machado | lucacm@al.insper.edu.br | [@lucacm](https://github.com/lucacm) |
-| | | |
-| | | |
+| Gabriel Cavarsan | gabrielcc2@al.insper.edu.br | [@Gabriel-Cavarsan](https://github.com/Gabriel-Cavarsan) |
+| Gabriel Gerner Maggion | gabrielgm1@al.insper.edu.br | [@gabrielgmaggion-dot](https://github.com/gabrielgmaggion-dot) |
 
 Times de 2 a 3 pessoas. Repita esses nomes no cabeçalho de cada entrega — quem corrige pode
 abrir uma página sozinha, sem passar por aqui.
@@ -29,8 +29,8 @@ abrir uma página sozinha, sem passar por aqui.
 | # | Entrega | Página |
 |---|---------|--------|
 | 1 | EDA | [EDA](eda/index.md) |
-| 2 | Classificação **ou** Regressão | [Classificação](classification/index.md) · [Regressão](regression/index.md) |
-| 3 | Generativo | [Generativo](generative/index.md) |
+| 2 | Classificação **ou** Regressão | *a entregar* |
+| 3 | Generativo | *a entregar* |
 
 Datas e pesos são da sua edição — veja o
 [overview](https://insper.github.io/ann-dl/){:target='_blank'}.
