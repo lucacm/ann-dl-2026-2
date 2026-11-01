@@ -1,3 +1,7 @@
+# Índice extra do PyTorch só-CPU: sem ele o pip do CI (Linux) baixaria o torch com CUDA,
+# vários GB a mais, sem necessidade (o CI só constrói o site).
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 # --- site (mkdocs) --------------------------------------------------------
 # O MkDocs 2.0 remove o sistema de plugins e quebra todos os plugins abaixo, sem
 # caminho de migração. Sem este limite, o CI de todo aluno quebra no dia do lançamento.
@@ -18,3 +22,6 @@ matplotlib
 seaborn
 scikit-learn
 umap-learn
+scipy
+torch
+torchvision

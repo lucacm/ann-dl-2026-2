@@ -21,7 +21,7 @@ Este site é um **portfólio** das entregas da disciplina.
 - [x] [Data](exercises/data/index.md)
 - [x] [Perceptron](exercises/perceptron/index.md)
 - [x] [MLP](exercises/mlp/index.md)
-- [ ] VAE
+- [x] [VAE](exercises/vae/index.md)
 
 ### Projeto — em equipe
 

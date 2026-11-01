@@ -17,3 +17,6 @@ docs/exercises/data/code/data/
 
 # Dataset CarDekho baixado manualmente do Kaggle (Projeto, EDA), não versionar dados brutos
 docs/projects/eda/code/data/
+
+# MNIST baixado pelo torchvision (Exercise 4, VAE), não versionar dados brutos
+docs/exercises/vae/code/data/

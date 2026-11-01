@@ -129,12 +129,11 @@ validation:
 # mas não são páginas da navegação.
 #
 # As entradas abaixo também tiram do menu o que ainda não foi entregue nesta edição
-# (VAE, Projeto) e as páginas de orientação do template (guia de uso,
+# (Projeto) e as páginas de orientação do template (guia de uso,
 # exemplos de nav). Os arquivos continuam no repositório para quando cada entrega for
 # feita, e nesse momento, volte a entrada correspondente para a `nav` abaixo.
 not_in_nav: |
   /exercises/*/code/*
-  /exercises/vae/**
   /projects/**
   /template/**
   /examples/**
@@ -143,6 +142,7 @@ not_in_nav: |
 # scripts: fora do site, mesmo num build local.
 exclude_docs: |
   /projects/eda/code/data/
+  /exercises/vae/code/data/
   __pycache__/
 
 extra_javascript:
@@ -166,7 +166,7 @@ nav:
   # A lista de entregas muda de edição para edição: acrescente ou remova itens
   # aqui e as pastas correspondentes em docs/.
   #
-  # VAE e Projeto ainda não foram entregues nesta edição: as pastas e
+  # O Projeto ainda não foi entregue por completo nesta edição: as pastas e
   # os templates em branco continuam em docs/, só não aparecem no menu por enquanto
   # (ver not_in_nav acima). Quando cada um for entregue, acrescente a linha correspondente
   # dentro da seção certa abaixo:
@@ -174,7 +174,7 @@ nav:
   - Data: exercises/data/index.md
   - Perceptron: exercises/perceptron/index.md
   - MLP: exercises/mlp/index.md
-  #     - VAE: exercises/vae/index.md
+  - VAE: exercises/vae/index.md
   - Projeto: 
     - projects/index.md
     - 1. EDA: projects/eda/index.md
