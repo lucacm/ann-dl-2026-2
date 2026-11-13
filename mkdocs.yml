@@ -165,11 +165,6 @@ nav:
 
   # A lista de entregas muda de edição para edição: acrescente ou remova itens
   # aqui e as pastas correspondentes em docs/.
-  #
-  # O Projeto ainda não foi entregue por completo nesta edição: as pastas e
-  # os templates em branco continuam em docs/, só não aparecem no menu por enquanto
-  # (ver not_in_nav acima). Quando cada um for entregue, acrescente a linha correspondente
-  # dentro da seção certa abaixo:
 
   - Data: exercises/data/index.md
   - Perceptron: exercises/perceptron/index.md
@@ -178,9 +173,7 @@ nav:
   - Projeto: 
     - projects/index.md
     - 1. EDA: projects/eda/index.md
-  #     - 2. Classificação: projects/classification/index.md   # escolha UMA das duas
-  #     - 2. Regressão: projects/regression/index.md            # e apague a outra
-  #     - 3. Generativo: projects/generative/index.md
+    - 2. Regressão: projects/regression/index.md
 
 
   # O link para o enunciado já aparece na Home (bloco "Edição") e em cada página de

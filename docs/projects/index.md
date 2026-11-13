@@ -4,16 +4,10 @@
 
     [Projects](https://insper.github.io/ann-dl/){:target='_blank'}
 
-O projeto é **um só**, feito em equipe sobre **o mesmo dataset**, e entregue em três partes
+O projeto é **um só**, feito em equipe sobre **o mesmo dataset**, e entregue em duas partes
 ao longo do semestre, cada uma com data e peso próprios.
 
 ## Equipe
-
-!!! danger "Preencha antes de qualquer entrega"
-
-    Toda entrega do projeto é avaliada em equipe. Se os nomes não estiverem aqui, não há
-    como atribuir a nota — e o mesmo vale para o `mkdocs.yml`, cujo `site_author` deve
-    listar o grupo.
 
 | Nome completo | E-mail | GitHub |
 |---------------|--------|--------|
@@ -24,33 +18,20 @@ ao longo do semestre, cada uma com data e peso próprios.
 Times de 2 a 3 pessoas. Repita esses nomes no cabeçalho de cada entrega — quem corrige pode
 abrir uma página sozinha, sem passar por aqui.
 
-## As três entregas
+## As entregas
 
 | # | Entrega | Página |
 |---|---------|--------|
 | 1 | EDA | [EDA](eda/index.md) |
-| 2 | Classificação **ou** Regressão | *a entregar* |
-| 3 | Generativo | *a entregar* |
+| 2 | Regressão | [Regressão](regression/index.md) |
 
 Datas e pesos são da sua edição — veja o
 [overview](https://insper.github.io/ann-dl/){:target='_blank'}.
 
-!!! danger "A nota do projeto costuma ser limitada por uma prova sobre o próprio projeto"
-
-    Deliverables bem escritos não sustentam uma equipe que não consegue explicar o que
-    entregou. Escreva os relatórios de modo que você consiga defendê-los meses depois, e
-    confira no overview da sua edição como a prova entra na nota.
-
-!!! warning "Escolha uma: classificação ou regressão"
-
-    A segunda entrega é **uma das duas**, não as duas. Este template traz as duas pastas
-    para você escolher; depois de decidir, apague a que não vai usar — da pasta `docs/projects/`
-    **e** da `nav` no `mkdocs.yml`.
-
 ## Dataset
 
-O mesmo dataset atravessa as três entregas — escolhê-lo bem no EDA é o que torna as outras
-duas viáveis.
+O mesmo dataset atravessa as duas entregas — escolhê-lo bem no EDA é o que torna a regressão
+viável.
 
 | | |
 |---|---|
@@ -72,8 +53,7 @@ evidências em [1. EDA](eda/index.md).
 ## Status
 
 - [x] **1. EDA**
-- [ ] **2. Classificação ou Regressão**
-- [ ] **3. Generativo**
+- [x] **2. Regressão**
 
 ## Registro de decisões
 
@@ -88,3 +68,4 @@ projeto.
 | 2026-10-07 | Manter só as 12 colunas comuns a v3 e v4 | colunas de um arquivo só teriam 20% (`mileage`) a 80% (exclusivas do v4) de ausência estrutural |
 | 2026-10-07 | Deduplicar no arquivo bruto e colapsar reanúncios no preço mediano | 1202 duplicatas exatas e 213 grupos do mesmo carro com preço diferente no v3 ([EDA, 1B](eda/index.md#1b-qualidade)) |
 | 2026-10-07 | Alvo em log; `source` fora do modelo | assimetria 8,39 → 0,43; a diferença v3/v4 cai de 2,06× para 1,11× quando se comparam carros parecidos ([EDA, 3B](eda/index.md#3b-categorica-alvo)) |
+| 2026-11-13 | Entrega 2: métrica principal MAE em ₹ (alvo treinado em log e invertido para as métricas); sucesso = MAE de teste ≥ 15% menor que o melhor baseline | MAE é a métrica mais fácil de interpretar no domínio e menos dominada pelos carros de luxo que o RMSE ([Regressão, passo 0](regression/index.md#0-ponto-de-partida)) |

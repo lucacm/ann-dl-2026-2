@@ -25,8 +25,7 @@ Este site é um **portfólio** das entregas da disciplina.
 
 ### Projeto — em equipe
 
-Um projeto, um dataset, três entregas:
+Um projeto, um dataset, duas entregas:
 
 - [x] [EDA](projects/eda/index.md)
-- [ ] Classificação **ou** Regressão
-- [ ] Generativo
+- [x] [Regressão](projects/regression/index.md)

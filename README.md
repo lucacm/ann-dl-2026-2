@@ -16,7 +16,7 @@ docs/
     perceptron/{index.md,code/,figures/}  # entregue
     mlp/{index.md,code/,figures/}
     vae/{index.md,code/,figures/}
-  projects/                             # projeto em equipe, três entregas
+  projects/                             # projeto em equipe, duas entregas
 mkdocs.yml
 requirements.txt
 ```
